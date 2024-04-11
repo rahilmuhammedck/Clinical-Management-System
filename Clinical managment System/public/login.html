@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login_styles.css"> <!-- Link to login page CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+
+    <section>
+        <form id="loginForm" onsubmit="login(event)">
+            <label for="userType">Login As:</label><br>
+            <select id="userType" name="userType">
+                <option value="admin">Admin</option>
+                <option value="patient">Patient</option>
+            </select><br><br>
+
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+
+            <button type="submit">Login</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Acupuncture Clinic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function login(event) {
+            event.preventDefault();
+
+            // Retrieve username, password, and user type from form
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const userType = document.getElementById('userType').value;
+
+            // Static username and password for admin and patient (demo)
+            const adminUsername = "admin";
+            const adminPassword = "admin123";
+            const patientUsername = "patient";
+            const patientPassword = "patient123";
+
+            // Check if entered credentials match admin credentials
+            if (userType === "admin" && username === adminUsername && password === adminPassword) {
+                // Redirect to admin dashboard
+                window.location.href = "views/admin/admin_dashboard.html"; // Make sure the file path is correct
+            }
+            // Check if entered credentials match patient credentials
+            else if (userType === "patient" && username === patientUsername && password === patientPassword) {
+                // Redirect to patient dashboard
+                window.location.href = "views/patient/patient_dashboard.html"; // Make sure the file path is correct
+            }
+            else {
+                // Display error message (demo - replace with proper error handling)
+                alert("Invalid username or password");
+            }
+        }
+    </script>
+</body>
+</html>

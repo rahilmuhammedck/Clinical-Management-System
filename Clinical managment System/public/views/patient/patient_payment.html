@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Payment</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="css/patient_styles.css">
+</head>
+<body>
+    <header>
+        <h1>Patient Payment</h1>
+        <nav>
+            <!-- Navigation links -->
+            <ul>
+                <li><a href="patient_dashboard.html">Dashboard</a></li>
+                <li><a href="patient_appointment.html">Appointment</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <section class="payment-details">
+        <h2>Make a Payment</h2>
+        <!-- Payment form -->
+        <form id="paymentForm" onsubmit="processPayment(event)">
+            <!-- Payment details inputs -->
+            <label for="cardNumber">Card Number:</label><br>
+            <input type="text" id="cardNumber" name="cardNumber" required><br>
+
+            <label for="cvv">CVV:</label><br>
+            <input type="text" id="cvv" name="cvv" required><br>
+
+            <label for="paymentMethod">Payment Method:</label><br>
+            <select id="paymentMethod" name="paymentMethod">
+                <option value="card">Credit/Debit Card</option>
+                <option value="upi">UPI</option>
+            </select><br>
+
+            <!-- Add more payment fields as needed -->
+
+            <button type="submit">Submit Payment</button>
+        </form>
+    </section>
+
+    <section class="appointment-details">
+        <h2>Appointment Details</h2>
+        <div id="appointmentDetails">
+            <!-- Appointment details will be displayed here -->
+        </div>
+        <button onclick="printAppointmentDetails()">Print Appointment</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Acupuncture Clinic. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript code for processing payment -->
+    <script>
+        function processPayment(event) {
+            event.preventDefault();
+
+            // Get form data
+            const cardNumber = document.getElementById('cardNumber').value;
+            const cvv = document.getElementById('cvv').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            // Process payment (you can send data to server or handle client-side)
+            console.log('Payment processed:', cardNumber, cvv, paymentMethod);
+
+            // Display appointment details
+            displayAppointmentDetails();
+        }
+
+        function displayAppointmentDetails() {
+            // Retrieve appointment data from localStorage
+            const appointmentData = JSON.parse(localStorage.getItem('appointmentData'));
+
+            // Generate HTML for appointment details
+            const appointmentHTML = `
+                <p><strong>Full Name:</strong> ${appointmentData.fullName}</p>
+                <p><strong>Email:</strong> ${appointmentData.email}</p>
+                <p><strong>Phone Number:</strong> ${appointmentData.phoneNumber}</p>
+                <p><strong>Date:</strong> ${appointmentData.date}</p>
+                <p><strong>Time:</strong> ${appointmentData.time}</p>
+                <!-- Add more appointment details as needed -->
+            `;
+
+            // Display appointment details in the appointmentDetails div
+            document.getElementById('appointmentDetails').innerHTML = appointmentHTML;
+        }
+
+        function printAppointmentDetails() {
+            // Print appointment details
+            window.print();
+        }
+
+        // Display appointment details when the page loads
+        window.onload = displayAppointmentDetails;
+    </script>
+</body>
+</html>

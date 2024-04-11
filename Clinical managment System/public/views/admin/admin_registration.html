@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <link rel="stylesheet" href="css/admin_styles.css"> <!-- Link to admin dashboard CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Admin Registration</h1>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">Dashboard</a></li>
+                <li><a href="admin_appointments.html">Appointments</a></li>
+                <li><a href="admin_payment.html">Payment</a></li>
+                <li><a href="admin_feedback.html">Feedback</a></li>
+                <li><a href="admin_registration.html">Registration</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="registration-form">
+        <h2>Register New Admin</h2>
+        <form id="registrationForm" onsubmit="registerAdmin(event)">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+
+            <label for="confirmPassword">Confirm Password:</label><br>
+            <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+
+            <button type="submit">Register</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Acupuncture Clinic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function registerAdmin(event) {
+            event.preventDefault();
+
+            // Retrieve form data
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate password match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return;
+            }
+
+            // Add your logic to register the admin (demo)
+            alert(`Registered new admin with username: ${username}`);
+            
+            // Reset the form after submission
+            document.getElementById('registrationForm').reset();
+        }
+    </script>
+</body>
+</html>

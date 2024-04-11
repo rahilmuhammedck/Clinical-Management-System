@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Feedback</title>
+    <link rel="stylesheet" href="css/patient_styles.css"> <!-- Link to patient dashboard CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Patient Feedback</h1>
+        <nav>
+            <ul>
+                <li><a href="patient_appointment.html">My Appointments</a></li>
+                <li><a href="patient_feedback.html">Provide Feedback</a></li>
+                <li><a href="patient_payment.html">Payment Details</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Provide Your Feedback</h2>
+        <form id="feedbackForm" onsubmit="submitFeedback(event)">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="feedback">Feedback:</label><br>
+            <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea><br>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Acupuncture Clinic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function submitFeedback(event) {
+            event.preventDefault();
+
+            // Retrieve form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const feedback = document.getElementById('feedback').value;
+
+            // You can send this data to the server or perform any other action
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Feedback:', feedback);
+
+            // Clear the form after submission
+            document.getElementById('feedbackForm').reset();
+        }
+    </script>
+</body>
+</html>

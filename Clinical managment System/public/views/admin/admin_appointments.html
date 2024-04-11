@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Appointment</title>
+    <link rel="stylesheet" href="admin_styles.css"> <!-- Link to admin CSS file -->
+    <style>
+        body {
+            background-image: url('background_image.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background color */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        li:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .no-appointments {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Appointment List</h1>
+        <ul id="appointmentList">
+            <!-- Appointments will be dynamically added here -->
+        </ul>
+        <div class="no-appointments" id="noAppointments">
+            No appointments booked yet.
+        </div>
+        <a href="admin_dashboard.html" class="dashboard-link">Go to Admin Dashboard</a>
+    </div>
+
+    <script>
+        // Retrieve appointment data from localStorage
+        const appointmentJSON = localStorage.getItem('appointment');
+        if (appointmentJSON) {
+            const appointmentData = JSON.parse(appointmentJSON);
+
+            // Display appointment data
+            const appointmentList = document.getElementById('appointmentList');
+            const listItem = document.createElement('li');
+            listItem.textContent = `Name: ${appointmentData.fullName}, Date: ${appointmentData.date}, Time: ${appointmentData.time}, Treatment: ${appointmentData.treatment}`;
+            appointmentList.appendChild(listItem);
+
+            // Hide "No appointments" message
+            document.getElementById('noAppointments').style.display = 'none';
+        } else {
+            // Show "No appointments" message
+            document.getElementById('noAppointments').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

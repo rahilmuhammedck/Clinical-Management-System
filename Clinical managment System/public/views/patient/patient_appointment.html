@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Appointment</title>
+    <link rel="stylesheet" href="patient_styles.css"> <!-- Link to patient CSS file -->
+    <style>
+        body {
+            background-image: url('background_image.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book an Appointment</h1>
+        <!-- Appointment booking form -->
+        <form id="appointmentForm" onsubmit="saveAppointmentData(event)">
+            <!-- Form fields -->
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required><br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required><br>
+
+            <label for="treatment">Treatment Type:</label>
+            <select id="treatment" name="treatment" required>
+                <option value="Acupuncture">Acupuncture</option>
+                <option value="Massage">Massage</option>
+                <!-- Add more treatment options if needed -->
+            </select><br>
+
+            <button type="submit">Book Appointment</button>
+        </form>
+    </div>
+
+    <script>
+        function saveAppointmentData(event) {
+            event.preventDefault();
+
+            // Get form data
+            const fullName = document.getElementById('fullName').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const treatment = document.getElementById('treatment').value;
+
+            // Create appointment object
+            const appointmentData = {
+                fullName,
+                date,
+                time,
+                treatment
+            };
+
+            // Store appointment data in localStorage
+            localStorage.setItem('appointment', JSON.stringify(appointmentData));
+
+            // Redirect to dashboard
+            window.location.href = 'patient_dashboard.html';
+        }
+    </script>
+</body>
+</html>
