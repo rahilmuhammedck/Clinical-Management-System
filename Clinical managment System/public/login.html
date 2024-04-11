@@ -34,35 +34,37 @@
     </footer>
 
     <script>
-        function login(event) {
-            event.preventDefault();
+    function login(event) {
+        event.preventDefault();
 
-            // Retrieve username, password, and user type from form
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const userType = document.getElementById('userType').value;
+        // Retrieve username, password, and user type from form
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const userType = document.getElementById('userType').value;
 
-            // Static username and password for admin and patient (demo)
-            const adminUsername = "admin";
-            const adminPassword = "admin123";
-            const patientUsername = "patient";
-            const patientPassword = "patient123";
+        // Static username and password for admin (demo)
+        const adminUsername = "admin";
+        const adminPassword = "admin123";
 
-            // Check if entered credentials match admin credentials
-            if (userType === "admin" && username === adminUsername && password === adminPassword) {
-                // Redirect to admin dashboard
-                window.location.href = "views/admin/admin_dashboard.html"; // Make sure the file path is correct
-            }
-            // Check if entered credentials match patient credentials
-            else if (userType === "patient" && username === patientUsername && password === patientPassword) {
-                // Redirect to patient dashboard
-                window.location.href = "views/patient/patient_dashboard.html"; // Make sure the file path is correct
-            }
-            else {
-                // Display error message (demo - replace with proper error handling)
-                alert("Invalid username or password");
-            }
+        // Retrieve patient credentials from localStorage
+        const storedPatientUsername = localStorage.getItem('username'); // Change to the key used for storing username
+        const storedPatientPassword = localStorage.getItem('password'); // Change to the key used for storing password
+
+        // Check if entered credentials match admin credentials
+        if (userType === "admin" && username === adminUsername && password === adminPassword) {
+            // Redirect to admin dashboard
+            window.location.href = "views/admin/admin_dashboard.html"; // Make sure the file path is correct
         }
-    </script>
+        // Check if entered credentials match patient credentials
+        else if (userType === "patient" && username === storedPatientUsername && password === storedPatientPassword) {
+            // Redirect to patient dashboard
+            window.location.href = "views/patient/patient_dashboard.html"; // Make sure the file path is correct
+        }
+        else {
+            // Display error message (demo - replace with proper error handling)
+            alert("Invalid username or password");
+        }
+    }
+</script>
 </body>
 </html>
