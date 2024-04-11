@@ -21,23 +21,31 @@
 
     <section class="feedback-list">
         <h2>Feedback from Patients</h2>
-        <ul>
-            <li>
-                <strong>Patient Name:</strong> John Doe<br>
-                <strong>Feedback:</strong> The treatment was effective. Thank you!<br>
-                <hr>
-            </li>
-            <li>
-                <strong>Patient Name:</strong> Jane Smith<br>
-                <strong>Feedback:</strong> Excellent service. Highly recommend!<br>
-                <hr>
-            </li>
-            <!-- Add more feedback entries as needed -->
+        <ul id="feedbackList">
+            <!-- Feedback entries will be dynamically added here -->
         </ul>
     </section>
 
     <footer>
         <p>&copy; 2024 Acupuncture Clinic. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Retrieve feedback data from local storage
+        const feedbackJSON = localStorage.getItem('feedbacks');
+        if (feedbackJSON) {
+            const feedbacks = JSON.parse(feedbackJSON);
+
+            // Display feedback entries
+            const feedbackList = document.getElementById('feedbackList');
+            feedbacks.forEach(feedback => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>Patient Name:</strong> ${feedback.name}<br>
+                                <strong>Feedback:</strong> ${feedback.feedback}<br>
+                                <hr>`;
+                feedbackList.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
