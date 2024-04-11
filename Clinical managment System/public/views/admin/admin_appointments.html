@@ -71,23 +71,23 @@
     </div>
 
     <script>
-        // Retrieve appointment data from localStorage
-        const appointmentJSON = localStorage.getItem('appointment');
-        if (appointmentJSON) {
-            const appointmentData = JSON.parse(appointmentJSON);
+    // Retrieve appointment data from localStorage
+    const appointmentJSON = localStorage.getItem('appointment');
+    if (appointmentJSON) {
+        const appointmentData = JSON.parse(appointmentJSON);
 
-            // Display appointment data
-            const appointmentList = document.getElementById('appointmentList');
-            const listItem = document.createElement('li');
-            listItem.textContent = `Name: ${appointmentData.fullName}, Date: ${appointmentData.date}, Time: ${appointmentData.time}, Treatment: ${appointmentData.treatment}`;
-            appointmentList.appendChild(listItem);
+        // Display appointment data
+        const appointmentList = document.getElementById('appointmentList');
+        const listItem = document.createElement('li');
+        listItem.textContent = `Name: ${appointmentData.fullName}, Date: ${appointmentData.date}, Time: ${appointmentData.time}, Treatment: ${appointmentData.treatment}, Phone Number: ${appointmentData.phoneNumber}`;
+        appointmentList.appendChild(listItem);
 
-            // Hide "No appointments" message
-            document.getElementById('noAppointments').style.display = 'none';
-        } else {
-            // Show "No appointments" message
-            document.getElementById('noAppointments').style.display = 'block';
-        }
-    </script>
+        // Hide "No appointments" message
+        document.getElementById('noAppointments').style.display = 'none';
+    } else {
+        // Show "No appointments" message
+        document.getElementById('noAppointments').style.display = 'block';
+    }
+</script>
 </body>
 </html>
