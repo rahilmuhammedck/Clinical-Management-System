@@ -39,22 +39,30 @@
     </footer>
 
     <script>
-        function submitFeedback(event) {
-            event.preventDefault();
+    function submitFeedback(event) {
+        event.preventDefault();
 
-            // Retrieve form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const feedback = document.getElementById('feedback').value;
+        // Retrieve form data
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const feedback = document.getElementById('feedback').value;
 
-            // You can send this data to the server or perform any other action
-            console.log('Name:', name);
-            console.log('Email:', email);
-            console.log('Feedback:', feedback);
+        // Create feedback object
+        const feedbackData = {
+            name,
+            email,
+            feedback
+        };
 
-            // Clear the form after submission
-            document.getElementById('feedbackForm').reset();
-        }
-    </script>
+        // Store feedback data in local storage
+        localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
+
+        // Clear the form after submission
+        document.getElementById('feedbackForm').reset();
+
+        // Display success message (optional)
+        alert('Feedback submitted successfully!');
+    }
+</script>
 </body>
 </html>
