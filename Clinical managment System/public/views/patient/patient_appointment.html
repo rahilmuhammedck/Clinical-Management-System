@@ -80,6 +80,9 @@
                 <!-- Add more treatment options if needed -->
             </select><br>
 
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required><br>
+
             <button type="submit">Book Appointment</button>
         </form>
     </div>
@@ -93,13 +96,15 @@
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
             const treatment = document.getElementById('treatment').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
 
             // Create appointment object
             const appointmentData = {
                 fullName,
                 date,
                 time,
-                treatment
+                treatment,
+                phoneNumber
             };
 
             // Store appointment data in localStorage
