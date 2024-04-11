@@ -15,7 +15,7 @@
     <section class="registration-form">
         <!-- Registration form fields go here -->
         <!-- For example: -->
-        <form>
+        <form id="registrationForm">
             <!-- Form fields -->
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" required><br>
@@ -25,8 +25,8 @@
 
             <!-- Other form fields as needed -->
 
-            <!-- Register link -->
-            <a href="login.html" class="register-link">Register</a>
+            <!-- Register button -->
+            <button type="submit" class="register-button">Register</button>
         </form>
     </section>
 
@@ -34,5 +34,34 @@
     <footer>
         <p>&copy; 2024 Acupuncture Clinic. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript code -->
+    <script>
+        // Function to handle user registration
+        function registerUser() {
+            // Get the form values
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Check if username is already registered
+            if (localStorage.getItem(username)) {
+                alert("Username already exists. Please choose a different one.");
+                return;
+            }
+
+            // Store the credentials in localStorage
+            localStorage.setItem(username, password);
+            alert("Registration successful. You can now login with your credentials.");
+            
+            // Redirect to login page
+            window.location.href = "login.html";
+        }
+
+        // Add event listener to the registration form
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            registerUser(); // Call the registerUser function
+        });
+    </script>
 </body>
 </html>
