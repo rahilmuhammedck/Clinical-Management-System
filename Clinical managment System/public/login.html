@@ -34,37 +34,45 @@
     </footer>
 
     <script>
-    function login(event) {
-        event.preventDefault();
+    // Function to handle user login
+    function loginUser() {
+        // Get the form values
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var userType = document.getElementById("userType").value;
 
-        // Retrieve username, password, and user type from form
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const userType = document.getElementById('userType').value;
-
-        // Static username and password for admin (demo)
-        const adminUsername = "admin";
-        const adminPassword = "admin123";
-
-        // Retrieve patient credentials from localStorage
-        const storedPatientUsername = localStorage.getItem('username'); // Change to the key used for storing username
-        const storedPatientPassword = localStorage.getItem('password'); // Change to the key used for storing password
-
-        // Check if entered credentials match admin credentials
-        if (userType === "admin" && username === adminUsername && password === adminPassword) {
-            // Redirect to admin dashboard
-            window.location.href = "views/admin/admin_dashboard.html"; // Make sure the file path is correct
+        // Check if the user is an admin
+        if (userType === "admin") {
+            // Check if the static admin credentials are correct
+            if (username === "admin" && password === "admin123") {
+                // Redirect to the admin dashboard
+                window.location.href = "views/admin/admin_dashboard.html";
+                return;
+            } else {
+                // Display an error message for incorrect admin credentials
+                alert("Invalid admin credentials. Please try again.");
+                return;
+            }
         }
-        // Check if entered credentials match patient credentials
-        else if (userType === "patient" && username === storedPatientUsername && password === storedPatientPassword) {
-            // Redirect to patient dashboard
-            window.location.href = "views/patient/patient_dashboard.html"; // Make sure the file path is correct
-        }
-        else {
-            // Display error message (demo - replace with proper error handling)
-            alert("Invalid username or password");
+
+        // Check if the username exists in local storage
+        var storedPassword = localStorage.getItem(username);
+
+        // Check if the stored password matches the entered password
+        if (storedPassword === password) {
+            // Redirect to the patient dashboard
+            window.location.href = "views/patient/patient_dashboard.html";
+        } else {
+            // Display an error message for incorrect patient credentials
+            alert("Invalid username or password. Please try again.");
         }
     }
+
+    // Add event listener to the login form
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+        loginUser(); // Call the loginUser function
+    });
 </script>
 </body>
 </html>
