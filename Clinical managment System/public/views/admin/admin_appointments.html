@@ -70,22 +70,35 @@
         <a href="admin_dashboard.html" class="dashboard-link">Go to Admin Dashboard</a>
     </div>
 
-    <script>
+   <script>
     // Retrieve appointment data from localStorage
-    const appointmentJSON = localStorage.getItem('appointment');
-    if (appointmentJSON) {
-        const appointmentData = JSON.parse(appointmentJSON);
+    const appointmentsJSON = localStorage.getItem('appointments');
+    if (appointmentsJSON) {
+        const appointmentsData = JSON.parse(appointmentsJSON);
 
-        // Display appointment data
+        // Get the appointment list element
         const appointmentList = document.getElementById('appointmentList');
-        const listItem = document.createElement('li');
-        listItem.textContent = `Name: ${appointmentData.fullName}, Date: ${appointmentData.date}, Time: ${appointmentData.time}, Treatment: ${appointmentData.treatment}, Phone Number: ${appointmentData.phoneNumber}`;
-        appointmentList.appendChild(listItem);
 
-        // Hide "No appointments" message
-        document.getElementById('noAppointments').style.display = 'none';
+        // Check if there are appointments
+        if (appointmentsData.length > 0) {
+            // Clear any existing appointments in the list
+            appointmentList.innerHTML = '';
+
+            // Loop through each appointment and display it
+            appointmentsData.forEach(appointment => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Name: ${appointment.fullName}, Date: ${appointment.date}, Time: ${appointment.time}, Treatment: ${appointment.treatment}, Phone Number: ${appointment.phoneNumber}`;
+                appointmentList.appendChild(listItem);
+            });
+
+            // Hide "No appointments" message
+            document.getElementById('noAppointments').style.display = 'none';
+        } else {
+            // Show "No appointments" message if there are no appointments
+            document.getElementById('noAppointments').style.display = 'block';
+        }
     } else {
-        // Show "No appointments" message
+        // Show "No appointments" message if there are no appointments in local storage
         document.getElementById('noAppointments').style.display = 'block';
     }
 </script>
