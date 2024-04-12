@@ -87,32 +87,39 @@
         </form>
     </div>
 
-    <script>
-        function saveAppointmentData(event) {
-            event.preventDefault();
+   <script>
+    function saveAppointmentData(event) {
+        event.preventDefault();
 
-            // Get form data
-            const fullName = document.getElementById('fullName').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            const treatment = document.getElementById('treatment').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
+        // Get form data
+        const fullName = document.getElementById('fullName').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const treatment = document.getElementById('treatment').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
 
-            // Create appointment object
-            const appointmentData = {
-                fullName,
-                date,
-                time,
-                treatment,
-                phoneNumber
-            };
+        // Retrieve existing appointments from localStorage or initialize an empty array
+        const existingAppointmentsJSON = localStorage.getItem('appointments');
+        let existingAppointments = existingAppointmentsJSON ? JSON.parse(existingAppointmentsJSON) : [];
 
-            // Store appointment data in localStorage
-            localStorage.setItem('appointment', JSON.stringify(appointmentData));
+        // Create new appointment object
+        const newAppointment = {
+            fullName,
+            date,
+            time,
+            treatment,
+            phoneNumber
+        };
 
-            // Redirect to dashboard
-            window.location.href = 'patient_dashboard.html';
-        }
-    </script>
+        // Add the new appointment to the existing appointments array
+        existingAppointments.push(newAppointment);
+
+        // Store updated appointments array in localStorage
+        localStorage.setItem('appointments', JSON.stringify(existingAppointments));
+
+        // Redirect to dashboard
+        window.location.href = 'patient_dashboard.html';
+    }
+</script>
 </body>
 </html>
